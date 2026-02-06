@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Daily Activities | Fresh Produce & Farming Operations</title>
+    <style>
+        :root {
+            --primary: #1b4332;
+            --accent: #ffb703;
+            --bg: #f8f9fa;
+            --text: #212529;
+            --upi: #0055a4;
+            --wa: #25D366;
+        }
+
+        body { font-family: 'Inter', system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); scroll-behavior: smooth; }
+
+        /* Navigation */
+        nav { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top:0; z-index:100;}
+        .logo { font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 12px; font-size: 1.3rem; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; margin-left: 20px; font-size: 0.9rem; }
+
+        /* Hero Section */
+        .hero { padding: 80px 10%; background: linear-gradient(rgba(27, 67, 50, 0.85), rgba(27, 67, 50, 0.85)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; text-align: center; }
+        .hero h1 { font-size: 3rem; margin: 0; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: var(--accent); margin-top: 15px; }
+
+        /* Trust Section */
+        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 40px 10%; background: white; text-align: center; }
+        .trust-item h4 { margin: 10px 0 5px; color: var(--primary); }
+        .trust-item p { font-size: 0.85rem; color: #666; margin: 0; }
+
+        /* Products Header */
+        .section-head { text-align: center; padding-top: 50px; }
+        .section-head h2 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
+        .underline { width: 60px; height: 4px; background: var(--accent); margin: 0 auto; }
+
+        /* Product Grid */
+        .section { padding: 40px 10%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .img-box { height: 250px; background: #eee; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .p-info { padding: 25px; }
+        .p-info h3 { margin: 0; color: var(--primary); }
+        .p-info p { font-size: 0.9rem; color: #666; margin: 10px 0; }
+        .price { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
+
+        /* Buttons */
+        .btn { width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+        .btn-order { background: var(--primary); color: white; }
+        .btn-order:hover { background: #2d6a4f; }
+
+        footer { background: #1a1a1a; color: white; padding: 60px 10%; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 15px; }
+    </style>
+</head>
+<body id="main">
+    <nav>
+        <div class="logo">🌾 Farm Daily</div>
+        <div class="nav-links">
+            <a href="#products">Activities</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Farm Fresh Daily<br>Activities & Produce</h1>
+        <p>Documenting our daily farming operations and fresh produce</p>
+    </section>
+
+    <section class="trust-bar">
+        <div class="trust-item">
+            <h4>🌱 Organic Farming</h4>
+            <p>Natural and sustainable practices.</p>
+        </div>
+        <div class="trust-item">
+            <h4>📅 Daily Updates</h4>
+            <p>Fresh content every day.</p>
+        </div>
+        <div class="trust-item">
+            <h4>🚜 Modern Equipment</h4>
+            <p>Latest farming technology.</p>
+        </div>
+        <div class="trust-item">
+            <h4>🌍 Local Community</h4>
+            <p>Serving our neighborhood.</p>
+        </div>
+    </section>
+
+    <div class="section-head" id="products">
+        <h2>Daily Farm Activities</h2>
+        <div class="underline"></div>
+    </div>
+
+    <section class="section">
+        <div class="grid">
+            <div class="card">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=800&q=80" alt="Crop Harvesting">
+                </div>
+                <div class="p-info">
+                    <h3>Crop Harvesting</h3>
+                    <p>Daily harvesting of seasonal crops including vegetables, grains, and fruits from our organic fields.</p>
+                    <ul style="font-size: 0.85rem; color: #666;">
+                        <li>Fresh seasonal vegetables</li>
+                        <li>Organic farming methods</li>
+                        <li>Quality controlled harvesting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=800&q=80" alt="Livestock Care">
+                </div>
+                <div class="p-info">
+                    <h3>Livestock Care</h3>
+                    <p>Daily care and feeding of our livestock including cattle, goats, and other farm animals.</p>
+                    <ul style="font-size: 0.85rem; color: #666;">
+                        <li>Regular health checkups</li>
+                        <li>Nutritious feed management</li>
+                        <li>Clean shelter maintenance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-box">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=800&q=80" alt="Field Maintenance">
+                </div>
+                <div class="p-info">
+                    <h3>Field Maintenance</h3>
+                    <p>Regular plowing, irrigation, and soil preparation activities to maintain healthy cropland.</p>
+                    <ul style="font-size: 0.85rem; color: #666;">
+                        <li>Soil testing and enrichment</li>
+                        <li>Irrigation system management</li>
+                        <li>Pest control measures</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-head" id="about">
+        <h2>About Our Farm</h2>
+        <div class="underline"></div>
+    </div>
+
+    <section class="section">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #666;">
+                Welcome to our daily farming operations blog. We document our day-to-day activities including crop cultivation, 
+                livestock management, and sustainable farming practices. Our farm focuses on organic methods and modern techniques 
+                to produce high-quality fresh produce for the local community.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div>
+                    <h3 style="color: var(--primary); font-size: 2.5rem; margin: 0;">5+</h3>
+                    <p style="color: #666;">Years Operating</p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); font-size: 2.5rem; margin: 0;">20+</h3>
+                    <p style="color: #666;">Acres Farmland</p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); font-size: 2.5rem; margin: 0;">100%</h3>
+                    <p style="color: #666;">Organic Methods</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">FARM DAILY</div>
+                <p>Documenting daily farming activities and sharing fresh produce with our community.</p>
+            </div>
+            <div>
+                <h4>Contact Us</h4>
+                <p>📞 <a href="tel:+917338242455" style="color: white; text-decoration: none;">+91 7338242455</a></p>
+                <p>✉️ <a href="mailto:preetampwar137@gmail.com" style="color: white; text-decoration: none;">preetampwar137@gmail.com</a></p>
+            </div>
+            <div>
+                <h4>Location</h4>
+                <p>Karnataka, India</p>
+                <p>Serving local communities</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 40px; opacity: 0.7;">© 2026 Farm Daily Activities. All rights reserved.</p>
+    </footer>
+</body>
+</html>
