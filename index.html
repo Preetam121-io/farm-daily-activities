@@ -1,129 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FarmersInsight | Daily Farm Updates</title>
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f6f3;
-}
-
-header {
-    background: #2e7d32;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-nav {
-    background: #1b5e20;
-    padding: 10px;
-    text-align: center;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-}
-
-.container {
-    width: 90%;
-    max-width: 900px;
-    margin: 20px auto;
-}
-
-.post {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.post h2 {
-    margin-top: 0;
-}
-
-.comment-section {
-    margin-top: 20px;
-}
-
-.comment {
-    background: #e8f5e9;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    background: #2e7d32;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1b5e20;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #2e7d32;
-    color: white;
-    margin-top: 30px;
-}
-
-@media(max-width:600px){
-    nav a {
-        display:block;
-        margin:10px 0;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arav Farm Diary | Daily Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .farm-card { transition: transform 0.2s; }
+        .farm-card:hover { transform: translateY(-4px); }
+    </style>
 </head>
+<body class="pb-12">
 
-<body>
+    <nav class="bg-green-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">Arav Poultry & Farms</h1>
+            <div class="space-x-4">
+                <button onclick="togglePostModal()" class="bg-white text-green-700 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-green-50">+ New Update</button>
+            </div>
+        </div>
+    </nav>
 
-<header>
-    <h1>FarmersInsight</h1>
-    <p>Real Daily Updates from Poultry & Fields</p>
-</header>
+    <header class="bg-green-600 text-white py-12 px-4 mb-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold mb-4">Daily Farm Log</h2>
+            <p class="text-green-100 text-lg">Follow our journey from the sugarcane fields to the poultry houses.</p>
+        </div>
+    </header>
 
-<nav>
-    <a href="#">Home</a>
-    <a href="#">Poultry</a>
-    <a href="#">Sugarcane</a>
-    <a href="#">Corn</a>
-    <a href="#">Contact</a>
-</nav>
+    <main class="max-w-2xl mx-auto px-4">
+        <div id="postFeed" class="space-y-8">
+            </div>
+    </main>
 
-<div class="container">
-
-<div class="post">
-    <h2>Today's Poultry Update 🐔</h2>
-    <p><strong>Date:</strong> <span id="todayDate"></span></p>
-    <p>
-        Today we collected 2,320 eggs from 2,500 layers. Feed intake was normal.
-        No mortality reported. Weather slightly humid.
-        Planning vaccination next week.
-    </p>
-
-    <div class="comment-section">
+    <div id="postModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[60]">
+        <div class="bg-white rounded-xl max-w-lg w-full p-6 shadow-2xl">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Share a Farm Update</h3>
+            <input id="postTitle" type="text" placeholder="Title (e.g., Sugarcane Harvest)" class="w-full border p-3 rounded-lg mb-4 focus:ring-2 focus:ring-green-500 outline-none">
+            <textarea id="postContent" rows="4" placeholder="What happened on the farm today?" class="w-full border p-3 rounded-lg mb-4 focus:ring-2 focus:ring-green-500 outline-none"></textarea>
+            <div class="flex justify-end space-x-3">
+                <button onclick="togglePostModal()" class
