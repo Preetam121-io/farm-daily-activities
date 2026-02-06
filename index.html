@@ -3,196 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm Daily Activities | Fresh Produce & Farming Operations</title>
+    <title>Farm Life | Daily Activities & Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1b4332;
+            --primary: #2d6a4f;
+            --secondary: #1b4332;
             --accent: #ffb703;
-            --bg: #f8f9fa;
-            --text: #212529;
-            --upi: #0055a4;
-            --wa: #25D366;
+            --bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #1c1e21;
+            --text-sub: #65676b;
+            --border: #dddfe2;
+            --fb-blue: #1877f2;
         }
 
-        body { font-family: 'Inter', system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--text); scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--bg); color: var(--text-main); }
 
         /* Navigation */
-        nav { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top:0; z-index:100;}
-        .logo { font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 12px; font-size: 1.3rem; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; margin-left: 20px; font-size: 0.9rem; }
+        nav { background: var(--primary); padding: 0.5rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top:0; z-index:1000; color: white;}
+        .logo { font-weight: 800; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .search-bar { background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 20px; width: 300px; display: flex; align-items: center; }
+        .search-bar input { background: none; border: none; color: white; margin-left: 10px; outline: none; width: 100%; }
+        .search-bar input::placeholder { color: rgba(255,255,255,0.7); }
+        .nav-icons { display: flex; gap: 25px; font-size: 1.2rem; }
+        .nav-icons i { cursor: pointer; opacity: 0.8; transition: 0.3s; }
+        .nav-icons i:hover { opacity: 1; }
 
-        /* Hero Section */
-        .hero { padding: 80px 10%; background: linear-gradient(rgba(27, 67, 50, 0.85), rgba(27, 67, 50, 0.85)), url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white; text-align: center; }
-        .hero h1 { font-size: 3rem; margin: 0; line-height: 1.2; }
-        .hero p { font-size: 1.2rem; color: var(--accent); margin-top: 15px; }
+        /* Main Layout */
+        .container { display: grid; grid-template-columns: 280px 1fr 300px; gap: 20px; padding: 20px 5%; max-width: 1400px; margin: 0 auto; }
 
-        /* Trust Section */
-        .trust-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 40px 10%; background: white; text-align: center; }
-        .trust-item h4 { margin: 10px 0 5px; color: var(--primary); }
-        .trust-item p { font-size: 0.85rem; color: #666; margin: 0; }
+        /* Sidebar & Widgets */
+        .sidebar, .widgets { position: sticky; top: 80px; height: fit-content; }
+        .card { background: var(--card-bg); border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); margin-bottom: 20px; overflow: hidden; }
+        .profile-card { padding: 0; text-align: center; }
+        .profile-cover { height: 80px; background: linear-gradient(var(--secondary), var(--primary)); }
+        .profile-img { width: 80px; height: 80px; border-radius: 50%; border: 4px solid white; margin-top: -40px; background: #eee; object-fit: cover; }
+        .profile-info { padding: 15px; }
+        .profile-info h3 { margin: 5px 0; font-size: 1.1rem; }
+        .profile-info p { color: var(--text-sub); font-size: 0.9rem; margin: 0; }
+        
+        .menu-list { list-style: none; padding: 10px; margin: 0; }
+        .menu-item { padding: 10px; border-radius: 6px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-weight: 500; }
+        .menu-item:hover { background: rgba(0,0,0,0.05); }
+        .menu-item i { width: 20px; color: var(--primary); }
 
-        /* Products Header */
-        .section-head { text-align: center; padding-top: 50px; }
-        .section-head h2 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
-        .underline { width: 60px; height: 4px; background: var(--accent); margin: 0 auto; }
+        /* Feed */
+        .feed { max-width: 680px; width: 100%; }
+        
+        /* Create Post */
+        .create-post { padding: 15px; }
+        .post-input-area { display: flex; gap: 10px; margin-bottom: 15px; }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #ddd; }
+        .fake-input { background: #f0f2f5; padding: 10px 15px; border-radius: 20px; flex: 1; color: var(--text-sub); cursor: pointer; }
+        .post-actions { display: flex; border-top: 1px solid var(--border); padding-top: 10px; justify-content: space-around; }
+        .action-btn { display: flex; align-items: center; gap: 8px; color: var(--text-sub); font-weight: 600; font-size: 0.9rem; cursor: pointer; padding: 8px; border-radius: 4px; transition: 0.2s; }
+        .action-btn:hover { background: #f2f2f2; }
+        .action-btn i.fa-image { color: #45bd62; }
+        .action-btn i.fa-video { color: #f02849; }
+        .action-btn i.fa-smile { color: #f7b928; }
 
-        /* Product Grid */
-        .section { padding: 40px 10%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .img-box { height: 250px; background: #eee; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .p-info { padding: 25px; }
-        .p-info h3 { margin: 0; color: var(--primary); }
-        .p-info p { font-size: 0.9rem; color: #666; margin: 10px 0; }
-        .price { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
+        /* Post Card */
+        .post { margin-bottom: 20px; }
+        .post-header { padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; }
+        .post-user { display: flex; gap: 10px; align-items: center; }
+        .post-user h4 { margin: 0; font-size: 0.95rem; }
+        .post-time { font-size: 0.8rem; color: var(--text-sub); display: block; }
+        .post-content { padding: 0 15px 12px; font-size: 0.95rem; line-height: 1.5; }
+        .post-image { width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-height: 500px; object-fit: cover; }
+        .post-stats { padding: 10px 15px; display: flex; justify-content: space-between; color: var(--text-sub); font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+        .reactions { display: flex; align-items: center; gap: 5px; }
+        .reaction-icons { display: flex; }
+        .reaction-icons i { width: 18px; height: 18px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; margin-left: -5px; }
+        .reaction-icons i:first-child { margin-left: 0; }
+        .like-bg { background: var(--fb-blue); }
+        .heart-bg { background: #f02849; }
+        
+        .post-footer { display: flex; padding: 4px 15px; justify-content: space-around; }
+        .post-action { flex: 1; text-align: center; padding: 8px; border-radius: 4px; cursor: pointer; color: var(--text-sub); font-weight: 600; font-size: 0.9rem; transition: 0.2s; }
+        .post-action:hover { background: #f2f2f2; }
+        .post-action.active { color: var(--fb-blue); }
 
-        /* Buttons */
-        .btn { width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.2s; }
-        .btn-order { background: var(--primary); color: white; }
-        .btn-order:hover { background: #2d6a4f; }
+        /* Comments Section */
+        .comments-area { background: #f9f9f9; padding: 15px; border-top: 1px solid var(--border); }
+        .wa-comment-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-bottom: 15px; }
+        .fb-comments-placeholder { background: #fff; border: 1px dashed #ccc; padding: 20px; text-align: center; color: #888; border-radius: 8px; }
 
-        footer { background: #1a1a1a; color: white; padding: 60px 10%; margin-top: 50px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-logo { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 15px; }
+        /* Widgets */
+        .widget-title { padding: 15px 15px 5px; font-weight: bold; color: var(--text-sub); font-size: 0.95rem; text-transform: uppercase; }
+        .contact-list { list-style: none; padding: 10px; margin: 0; }
+        .contact-item { padding: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; border-radius: 6px; transition: 0.2s; }
+        .contact-item:hover { background: rgba(0,0,0,0.05); }
+        .status-online { width: 10px; height: 10px; background: #45bd62; border-radius: 50%; border: 2px solid white; margin-left: auto; }
+
+        @media (max-width: 1100px) {
+            .widgets { display: none; }
+            .container { grid-template-columns: 250px 1fr; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .container { grid-template-columns: 1fr; padding: 10px; }
+            .search-bar { display: none; }
+        }
     </style>
 </head>
-<body id="main">
+<body>
     <nav>
-        <div class="logo">🌾 Farm Daily</div>
-        <div class="nav-links">
-            <a href="#products">Activities</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+        <div class="logo">
+            <i class="fas fa-seedling"></i>
+            FarmLife
+        </div>
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search updates...">
+        </div>
+        <div class="nav-icons">
+            <i class="fas fa-home" title="Home"></i>
+            <i class="fas fa-users" title="Community"></i>
+            <i class="fas fa-video" title="Live"></i>
+            <i class="fas fa-bell" title="Notifications"></i>
+            <i class="fas fa-bars" title="Menu"></i>
         </div>
     </nav>
 
-    <section class="hero">
-        <h1>Farm Fresh Daily<br>Activities & Produce</h1>
-        <p>Documenting our daily farming operations and fresh produce</p>
-    </section>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="card profile-card">
+                <div class="profile-cover"></div>
+                <img src="https://images.unsplash.com/photo-1595273670150-db0a3d39dbd3?auto=format&fit=crop&w=150&q=80" alt="Farm Profile" class="profile-img">
+                <div class="profile-info">
+                    <h3>Preetam's Farm</h3>
+                    <p>Modern Poultry & Crop Farming</p>
+                </div>
+                <div style="border-top: 1px solid var(--border); padding: 10px; font-size: 0.85rem; color: var(--text-sub); display: flex; justify-content: space-around;">
+                    <div><strong>1.2k</strong><br>Followers</div>
+                    <div><strong>450</strong><br>Following</div>
+                </div>
+            </div>
 
-    <section class="trust-bar">
-        <div class="trust-item">
-            <h4>🌱 Organic Farming</h4>
-            <p>Natural and sustainable practices.</p>
-        </div>
-        <div class="trust-item">
-            <h4>📅 Daily Updates</h4>
-            <p>Fresh content every day.</p>
-        </div>
-        <div class="trust-item">
-            <h4>🚜 Modern Equipment</h4>
-            <p>Latest farming technology.</p>
-        </div>
-        <div class="trust-item">
-            <h4>🌍 Local Community</h4>
-            <p>Serving our neighborhood.</p>
-        </div>
-    </section>
+            <div class="card">
+                <ul class="menu-list">
+                    <li class="menu-item"><i class="fas fa-egg"></i> Poultry Management</li>
+                    <li class="menu-item"><i class="fas fa-tint"></i> Sugarcane Fields</li>
+                    <li class="menu-item"><i class="fas fa-leaf"></i> Corn Cultivation</li>
+                    <li class="menu-item"><i class="fas fa-calendar-alt"></i> Daily Activities</li>
+                    <li class="menu-item"><i class="fas fa-store"></i> Farm Store</li>
+                    <li class="menu-item"><i class="fas fa-question-circle"></i> Ask a Question</li>
+                </ul>
+            </div>
+        </aside>
 
-    <div class="section-head" id="products">
-        <h2>Daily Farm Activities</h2>
-        <div class="underline"></div>
+        <!-- Center Feed -->
+        <main class="feed">
+            <!-- Create Post -->
+            <div class="card create-post">
+                <div class="post-input-area">
+                    <div class="user-avatar" style="background: url('https://images.unsplash.com/photo-1595273670150-db0a3d39dbd3?auto=format&fit=crop&w=150&q=80') center/cover;"></div>
+                    <div class="fake-input">What's happening on the farm today?</div>
+                </div>
+                <div class="post-actions">
+                    <div class="action-btn"><i class="fas fa-video"></i> Live Video</div>
+                    <div class="action-btn"><i class="fas fa-image"></i> Photo/Video</div>
+                    <div class="action-btn"><i class="fas fa-smile"></i> Feeling/Activity</div>
+                </div>
+            </div>
+
+            <!-- Post 1: Poultry -->
+            <div class="card post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <div class="user-avatar" style="background: url('https://images.unsplash.com/photo-1595273670150-db0a3d39dbd3?auto=format&fit=crop&w=150&q=80') center/cover;"></div>
+                        <div>
+                            <h4>Preetam's Farm <i class="fas fa-check-circle" style="color: var(--fb-blue); font-size: 0.8rem;"></i></h4>
+                            <span class="post-time">2 hours ago · <i class="fas fa-globe-americas"></i></span>
+                        </div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    Today's update from the Poultry Section 🥚. We collected over 2,500 fresh eggs this morning from our BV 300 flock. 
+                    The birds are looking healthy and the new organic feed mix is showing great results in shell quality. 
+                    <br><br>
+                    #PoultryFarming #FreshEggs #OrganicFeed #FarmLife
+                </div>
+                <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=800&q=80" alt="Poultry Feed" class="post-image">
+                <div class="post-stats">
+                    <div class="reactions">
+                        <div class="reaction-icons">
+                            <i class="fas fa-thumbs-up like-bg"></i>
+                            <i class="fas fa-heart heart-bg"></i>
+                        </div>
+                        <span>124 people like this</span>
+                    </div>
+                    <div>18 comments · 5 shares</div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-action active"><i class="far fa-thumbs-up"></i> Like</div>
+                    <div class="post-action"><i class="far fa-comment"></i> Comment</div>
+                    <div class="post-action"><i class="far fa-share-square"></i> Share</div>
+                </div>
+                <div class="comments-area">
+                    <a href="https://wa.me/917338242455?text=Hi Preetam, I have a question about your latest poultry post..." class="wa-comment-btn">
+                        <i class="fab fa-whatsapp"></i> Ask a Question on WhatsApp
+                    </a>
+                    <div class="fb-comments-placeholder">
+                        <i class="far fa-comment-dots"></i><br>
+                        Community comments section loading...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2: Sugarcane -->
+            <div class="card post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <div class="user-avatar" style="background: url('https://images.unsplash.com/photo-1595273670150-db0a3d39dbd3?auto=format&fit=crop&w=150&q=80') center/cover;"></div>
+                        <div>
+                            <h4>Preetam's Farm</h4>
+                            <span class="post-time">Yesterday at 4:30 PM · <i class="fas fa-globe-americas"></i></span>
+                        </div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    Check out the progress in our Sugarcane fields! 🎋 The growth has been phenomenal after the recent rains. 
+                    Irrigation systems are being checked today to ensure consistent moisture during the upcoming dry spell.
+                    <br><br>
+                    #Sugarcane #AgricultureIndia #RainfedCrops #GreenFields
+                </div>
+                <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80" alt="Sugarcane Field" class="post-image">
+                <div class="post-stats">
+                    <div class="reactions">
+                        <div class="reaction-icons">
+                            <i class="fas fa-thumbs-up like-bg"></i>
+                        </div>
+                        <span>89 people like this</span>
+                    </div>
+                    <div>12 comments</div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-action"><i class="far fa-thumbs-up"></i> Like</div>
+                    <div class="post-action"><i class="far fa-comment"></i> Comment</div>
+                    <div class="post-action"><i class="far fa-share-square"></i> Share</div>
+                </div>
+            </div>
+
+            <!-- Post 3: Corn -->
+            <div class="card post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <div class="user-avatar" style="background: url('https://images.unsplash.com/photo-1595273670150-db0a3d39dbd3?auto=format&fit=crop&w=150&q=80') center/cover;"></div>
+                        <div>
+                            <h4>Preetam's Farm</h4>
+                            <span class="post-time">Feb 5 at 10:15 AM · <i class="fas fa-globe-americas"></i></span>
+                        </div>
+                    </div>
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="post-content">
+                    Corn harvest is almost ready! 🌽 We're testing the moisture levels this week. Looking forward to a high-yield season.
+                    Interested in bulk orders? Message us!
+                </div>
+                <img src="https://images.unsplash.com/photo-1551730459-92db2a308d6a?auto=format&fit=crop&w=800&q=80" alt="Corn Harvest" class="post-image">
+                <div class="post-stats">
+                    <div class="reactions">
+                        <div class="reaction-icons">
+                            <i class="fas fa-heart heart-bg"></i>
+                        </div>
+                        <span>56 people love this</span>
+                    </div>
+                    <div>7 comments</div>
+                </div>
+                <div class="post-footer">
+                    <div class="post-action"><i class="far fa-thumbs-up"></i> Like</div>
+                    <div class="post-action"><i class="far fa-comment"></i> Comment</div>
+                    <div class="post-action"><i class="far fa-share-square"></i> Share</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Widgets -->
+        <aside class="widgets">
+            <div class="card">
+                <div class="widget-title">Sponsored / Featured</div>
+                <div style="padding: 15px;">
+                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=250&q=80" style="width: 100%; border-radius: 8px;">
+                    <h4 style="margin: 10px 0 5px;">Premium Poultry Feed</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-sub); margin: 0;">Get the best results for your flock.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="widget-title">Farm Experts Online</div>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <div class="user-avatar" style="width: 32px; height: 32px; background: #eee;"></div>
+                        <span>Dr. Sharma (Vet)</span>
+                        <div class="status-online"></div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="user-avatar" style="width: 32px; height: 32px; background: #eee;"></div>
+                        <span>Ramesh Kumar</span>
+                        <div class="status-online"></div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="user-avatar" style="width: 32px; height: 32px; background: #eee;"></div>
+                        <span>Agronomy Team</span>
+                        <div class="status-online"></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="padding: 0 15px; font-size: 0.75rem; color: var(--text-sub); line-height: 1.6;">
+                Privacy · Terms · Advertising · Cookies · Meta © 2026<br>
+                <strong>FarmLife by Preetam</strong>
+            </div>
+        </aside>
     </div>
 
-    <section class="section">
-        <div class="grid">
-            <div class="card">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=800&q=80" alt="Crop Harvesting">
-                </div>
-                <div class="p-info">
-                    <h3>Crop Harvesting</h3>
-                    <p>Daily harvesting of seasonal crops including vegetables, grains, and fruits from our organic fields.</p>
-                    <ul style="font-size: 0.85rem; color: #666;">
-                        <li>Fresh seasonal vegetables</li>
-                        <li>Organic farming methods</li>
-                        <li>Quality controlled harvesting</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=800&q=80" alt="Livestock Care">
-                </div>
-                <div class="p-info">
-                    <h3>Livestock Care</h3>
-                    <p>Daily care and feeding of our livestock including cattle, goats, and other farm animals.</p>
-                    <ul style="font-size: 0.85rem; color: #666;">
-                        <li>Regular health checkups</li>
-                        <li>Nutritious feed management</li>
-                        <li>Clean shelter maintenance</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=800&q=80" alt="Field Maintenance">
-                </div>
-                <div class="p-info">
-                    <h3>Field Maintenance</h3>
-                    <p>Regular plowing, irrigation, and soil preparation activities to maintain healthy cropland.</p>
-                    <ul style="font-size: 0.85rem; color: #666;">
-                        <li>Soil testing and enrichment</li>
-                        <li>Irrigation system management</li>
-                        <li>Pest control measures</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-head" id="about">
-        <h2>About Our Farm</h2>
-        <div class="underline"></div>
+    <!-- Mobile Footer Navigation -->
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); display: none; justify-content: space-around; padding: 10px; z-index: 1000;" id="mobile-nav">
+        <i class="fas fa-home" style="color: var(--primary); font-size: 1.2rem;"></i>
+        <i class="fas fa-user-friends" style="color: var(--text-sub); font-size: 1.2rem;"></i>
+        <i class="fas fa-plus-square" style="color: var(--text-sub); font-size: 1.2rem;"></i>
+        <i class="fas fa-bell" style="color: var(--text-sub); font-size: 1.2rem;"></i>
+        <i class="fas fa-shopping-bag" style="color: var(--text-sub); font-size: 1.2rem;"></i>
     </div>
 
-    <section class="section">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <p style="font-size: 1.1rem; line-height: 1.8; color: #666;">
-                Welcome to our daily farming operations blog. We document our day-to-day activities including crop cultivation, 
-                livestock management, and sustainable farming practices. Our farm focuses on organic methods and modern techniques 
-                to produce high-quality fresh produce for the local community.
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; margin-top: 40px;">
-                <div>
-                    <h3 style="color: var(--primary); font-size: 2.5rem; margin: 0;">5+</h3>
-                    <p style="color: #666;">Years Operating</p>
-                </div>
-                <div>
-                    <h3 style="color: var(--primary); font-size: 2.5rem; margin: 0;">20+</h3>
-                    <p style="color: #666;">Acres Farmland</p>
-                </div>
-                <div>
-                    <h3 style="color: var(--primary); font-size: 2.5rem; margin: 0;">100%</h3>
-                    <p style="color: #666;">Organic Methods</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-logo">FARM DAILY</div>
-                <p>Documenting daily farming activities and sharing fresh produce with our community.</p>
-            </div>
-            <div>
-                <h4>Contact Us</h4>
-                <p>📞 <a href="tel:+917338242455" style="color: white; text-decoration: none;">+91 7338242455</a></p>
-                <p>✉️ <a href="mailto:preetampwar137@gmail.com" style="color: white; text-decoration: none;">preetampwar137@gmail.com</a></p>
-            </div>
-            <div>
-                <h4>Location</h4>
-                <p>Karnataka, India</p>
-                <p>Serving local communities</p>
-            </div>
-        </div>
-        <p style="text-align: center; margin-top: 40px; opacity: 0.7;">© 2026 Farm Daily Activities. All rights reserved.</p>
-    </footer>
+    <script>
+        // Check for mobile to show footer
+        if (window.innerWidth <= 768) {
+            document.getElementById('mobile-nav').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
