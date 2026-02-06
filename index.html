@@ -1,44 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arav Farm Diary | Daily Updates</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
-        .farm-card { transition: transform 0.2s; }
-        .farm-card:hover { transform: translateY(-4px); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmersInsight | Real Farming Updates</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f8faf7;
+  color: #333;
+}
+
+header {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+nav {
+  background: white;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+nav a {
+  text-decoration: none;
+  color: #2e7d32;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #1b5e20;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  margin-bottom: 10px;
+  color: #1b5e20;
+}
+
+.date {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.comment-section {
+  margin-top: 30px;
+}
+
+.comment-section h3 {
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  background: #2e7d32;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1b5e20;
+}
+
+.comment {
+  background: #f1f8f4;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.comment strong {
+  color: #2e7d32;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  background: #1b5e20;
+  color: white;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+}
+</style>
 </head>
-<body class="pb-12">
 
-    <nav class="bg-green-700 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tight">Arav Poultry & Farms</h1>
-            <div class="space-x-4">
-                <button onclick="togglePostModal()" class="bg-white text-green-700 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-green-50">+ New Update</button>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <header class="bg-green-600 text-white py-12 px-4 mb-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-extrabold mb-4">Daily Farm Log</h2>
-            <p class="text-green-100 text-lg">Follow our journey from the sugarcane fields to the poultry houses.</p>
-        </div>
-    </header>
+<header>
+  <h1>FarmersInsight</h1>
+  <p>Daily Real Updates from Poultry & Crop Farming</p>
+</header>
 
-    <main class="max-w-2xl mx-auto px-4">
-        <div id="postFeed" class="space-y-8">
-            </div>
-    </main>
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Poultry</a>
+  <a href="#">Sugarcane</a>
+  <a href="#">Corn</a>
+  <a href="#">Community</a>
+</nav>
 
-    <div id="postModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[60]">
-        <div class="bg-white rounded-xl max-w-lg w-full p-6 shadow-2xl">
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Share a Farm Update</h3>
-            <input id="postTitle" type="text" placeholder="Title (e.g., Sugarcane Harvest)" class="w-full border p-3 rounded-lg mb-4 focus:ring-2 focus:ring-green-500 outline-none">
-            <textarea id="postContent" rows="4" placeholder="What happened on the farm today?" class="w-full border p-3 rounded-lg mb-4 focus:ring-2 focus:ring-green-500 outline-none"></textarea>
-            <div class="flex justify-end space-x-3">
-                <button onclick="togglePostModal()" class
+<div class="container">
+
+  <div class="card">
+    <h2>🐔 Poultry Daily Report</h2>
+    <div class="date" id="todayDate"></div>
+
+    <p>
+      Today we collected 2,320 eggs from 2,500 laying hens.
+      Feed intake stable. Mortality: 0.
+      Weather slightly humid — ventilation adjusted accordingly.
+      Vaccination scheduled next week.
+    </p>
+
+    <div class="comment-section">
+      <h3>Farmer Community Discussion</h3>
+      <input type="text" id="username" placeholder="Your Name">
+      <textarea id="commentInput" rows="3" placeholder="Ask something or share your experience..."></textarea>
+      <button onclick="addComment()">Post Comment</button>
+
+      <div id="commentsContainer"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 FarmersInsight | Built by a Real Farmer 🚜
+</footer>
+
+<script>
+document.getElementById("todayDate").innerText = new Date().toDateString();
+
+function addComment() {
+  const username = document.getElementById("username").value.trim();
+  const commentText = document.getElementById("commentInput").value.trim();
+
+  if (!username || !commentText) {
+    alert("Please enter both name and comment.");
+    return;
+  }
+
+  const commentData = {
+    name: username,
+    text: commentText
+  };
+
+  let comments = JSON.parse(localStorage.getItem("farmComments")) || [];
+  comments.push(commentData);
+  localStorage.setItem("farmComments", JSON.stringify(comments));
+
+  document.getElementById("commentInput").value = "";
+  displayComments();
+}
+
+function displayComments() {
+  const container = document.getElementById("commentsContainer");
+  container.innerHTML = "";
+
+  let comments = JSON.parse(localStorage.getItem("farmComments")) || [];
+
+  comments.forEach(c => {
+    const div = document.createElement("div");
+    div.classList.add("comment");
+    div.innerHTML = `<strong>${c.name}</strong><br>${c.text}`;
+    container.appendChild(div);
+  });
+}
+
+displayComments();
+</script>
+
+</body>
+</html>
